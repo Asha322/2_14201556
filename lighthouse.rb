@@ -10,7 +10,7 @@ class LightHouse
       @light = :OFF
     end
   end
-  def on_or_off
+  def on_or_off?
     @light
   end
 end
