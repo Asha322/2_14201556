@@ -8,6 +8,6 @@ class Card
   end
 
   def to_s
-    return @rank
+    @rank
   end
 end
