@@ -20,7 +20,9 @@ class Hand
 
   def add_card(c)
     if !(self.complete?)
-      @cards.push(c)
+      if !(self.contains?(c))
+        @cards.push(c)
+      end
     end
   end
 
