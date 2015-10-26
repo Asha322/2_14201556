@@ -35,7 +35,7 @@ class Hand_2cards < Hand
 
   def initialize
     @size = 2
-    @cards = Array.new
+    @cards = []
   end
 end
 
@@ -50,31 +50,16 @@ class Hand_5cards < Hand
 end
 
 module Evaluate
-  def find_min
-    min = @hash_values[@cards[0].to_s]
-    @cards.each do |i|
-      if @hash_values[i.to_s] < min
-        min = @hash_values[i.to_s]
-      end
-    end
-    min
-  end
-
-  def find_max
-    max = @hash_values[@cards[0].to_s]
-    @cards.each do |i|
-      if @hash_values[i.to_s] > max
-        max = @hash_values[i.to_s]
-      end
-    end
-    max
-  end
 
   def evaluate
     if !complete?
       return nil
     end
-    (find_max + find_min)/@size.to_f
+    arr = []
+    @cards.each do |i|
+      arr.push(@hash_values[i.to_s])
+    end
+    (arr.max + arr.min)/@size.to_f
   end
 end
 
@@ -87,22 +72,14 @@ class Spider < Hand_5cards
                     "Eight" => 0, "Nine" => 0, "Ten" => 0}
   end
 
-  def sort_hand!       #to find median - the middle value in a sorted array
-    for i in 0..4
-      for j in i+1..4
-        if @hash_values[@cards[i].to_s] > @hash_values[@cards[j].to_s]
-          temp = @cards[i]
-          @cards[i] = @cards[j]
-          @cards[j] = temp
-        end
-      end
-    end
-  end
-
   def evaluate
     nil if !complete?
-    #sort_hand!
-    @hash_values[@cards[2].to_s]
+    arr = []
+    @cards.each do |i|
+      arr.push(@hash_values[i.to_s])
+    end
+    arr.sort!         #to find median - the middle value in a sorted array
+    arr[2]
   end
 end
 
