@@ -23,6 +23,7 @@ class Hand_test < Test::Unit::TestCase
     ace = Card.new("Ace")
     king = Card.new("King")
     ten = Card.new("Ten")
+    three = Card.new("Three")
 
     #test Spider class
 
@@ -46,6 +47,9 @@ class Hand_test < Test::Unit::TestCase
     @spider.add_card(ten)
     assert_equal(5, @spider.cards.size, 'extra value added')
 
+    @spider.add_card(three)
+    assert_equal(false, @spider.contains?(three), 'extra value added')
+
     assert_equal(0, @spider.value(ten), 'different value found')
     assert_equal(1, @spider.value(king), 'different value found')
 
@@ -59,6 +63,7 @@ class Hand_test < Test::Unit::TestCase
     ace = Card.new("Ace")
     king = Card.new("King")
     ten = Card.new("Ten")
+    three = Card.new("Three")
 
     #test Light class
 
@@ -83,6 +88,9 @@ class Hand_test < Test::Unit::TestCase
     @light.add_card(ten)
     assert_equal(5, @light.cards.size, 'extra value added')
 
+    @light.add_card(three)
+    assert_equal(false, @light.contains?(three), 'extra value added')
+
     assert_equal(11, @light.value(ten), 'different value found')
     assert_equal(6, @light.value(king), 'different value found')
 
@@ -90,5 +98,9 @@ class Hand_test < Test::Unit::TestCase
     assert_equal(1, @light.find_min, 'min found incorrectly')
     assert_equal(2.8, @light.evaluate, 'hand evaluated incorrectly')
     assert_not_equal(nil, @light.evaluate, 'hand is not complete')
+  end
+
+  def test_idiot
+
   end
 end
