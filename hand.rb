@@ -24,6 +24,7 @@ class Hand
   end
 
   def value(c)
+    #puts @hash_values.inspect
     @hash_values[c.to_s]
   end
 
@@ -74,9 +75,13 @@ module Evaluate
 end
 
 class Spider < Hand_5cards
-  @hash_values = {"Ace"=>0, "Jack"=>3, "Queen"=>2, "King"=>1, "Two"=>0,
-                  "Three"=>0, "Four"=>0, "Five"=>0, "Six"=>0, "Seven"=>0,
-                  "Eight"=>0, "Nine"=>0, "Ten"=>0}
+
+  def initialize
+    super
+    @hash_values = {"Ace" => 0, "Jack" => 3, "Queen" => 2, "King" => 1, "Two" => 0,
+                    "Three" => 0, "Four" => 0, "Five" => 0, "Six" => 0, "Seven" => 0,
+                    "Eight" => 0, "Nine" => 0, "Ten" => 0}
+  end
 
   def sort_hand!       #to find median - the middle value in a sorted array
     for i in 1..4
@@ -91,11 +96,9 @@ class Spider < Hand_5cards
   end
 
   def evaluate
-    if !self.complete?
-      return nil
-    end
-    sort_hand!
-    @cards[2]
+    nil if !complete?
+    #sort_hand!
+    @hash_values[@cards[2].to_s]
   end
 end
 

@@ -35,6 +35,7 @@ class Hand_test < Test::Unit::TestCase
     assert_not_equal(true, @spider.complete?, 'incorrect evaluation')
     assert_equal(true, @spider.contains?(nine), 'value removed')
     assert_not_equal(true, @spider.complete?, 'incorrect evaluation')
+    assert_equal(nil, @spider.evaluate, 'hand evaluated when not complete')
 
     @spider.add_card(ace)
     @spider.add_card(king)
@@ -44,5 +45,10 @@ class Hand_test < Test::Unit::TestCase
 
     @spider.add_card(ten)
     assert_equal(5, @spider.cards.size, 'extra value added')
+
+    assert_equal(0, @spider.value(ten), 'different value found')
+    assert_equal(1, @spider.value(king), 'different value found')
+
+    assert_equal(0, @spider.evaluate, 'hand evaluated when not complete')
   end
 end
