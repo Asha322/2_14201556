@@ -5,6 +5,7 @@ class Hand
   @cards
 
   attr_accessor :size, :cards
+
   def complete?
     @cards.size == @size
   end
@@ -12,10 +13,10 @@ class Hand
   def contains?(c)
     @cards.each do |i|
       if i.to_s == c.to_s
-        return false
+        return true
       end
     end
-    return true
+    return false
   end
 
   def add_card(c)
