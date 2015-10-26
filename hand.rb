@@ -24,7 +24,6 @@ class Hand
   end
 
   def value(c)
-    #puts @hash_values.inspect
     @hash_values[c.to_s]
   end
 
@@ -52,25 +51,30 @@ end
 
 module Evaluate
   def find_min
-    min = @hash_values[@cards[0]]
+    min = @hash_values[@cards[0].to_s]
     @cards.each do |i|
-      if @hash_values[i] < min
-        min = @hash_values[i]
+      if @hash_values[i.to_s] < min
+        min = @hash_values[i.to_s]
       end
     end
+    min
   end
 
   def find_max
-    max = @hash_values[@cards[0]]
+    max = @hash_values[@cards[0].to_s]
     @cards.each do |i|
-      if @hash_values[i] < max
-        max = @hash_values[i]
+      if @hash_values[i.to_s] > max
+        max = @hash_values[i.to_s]
       end
     end
+    max
   end
 
   def evaluate
-    (find_max - find_min)/@size
+    if !complete?
+      return nil
+    end
+    (find_max + find_min)/@size.to_f
   end
 end
 
@@ -84,9 +88,9 @@ class Spider < Hand_5cards
   end
 
   def sort_hand!       #to find median - the middle value in a sorted array
-    for i in 1..4
+    for i in 0..4
       for j in i+1..4
-        if @hash_values[@cards[i]] > @hash_values[@cards[j]]
+        if @hash_values[@cards[i].to_s] > @hash_values[@cards[j].to_s]
           temp = @cards[i]
           @cards[i] = @cards[j]
           @cards[j] = temp
@@ -104,21 +108,30 @@ end
 
 class Light < Hand_5cards
   include Evaluate
-  @hash_values = {"Ace"=>1,"Jack"=>5, "Queen"=>8, "King"=>6, "Two"=>13,
+  def initialize
+    super
+    @hash_values = {"Ace"=>1,"Jack"=>5, "Queen"=>8, "King"=>6, "Two"=>13,
                   "Three"=>12, "Four"=>4, "Five"=>3, "Six"=>10, "Seven"=>9,
                   "Eight"=>2, "Nine"=>7, "Ten"=>11}
+  end
 end
 
 class Idiot < Hand_2cards
   include Evaluate
-  @hash_values = {"Ace"=>1, "Two"=>2, "Three"=>3, "Four"=>4, "Five"=>5,
-                  "Six"=>6, "Seven"=>7, "Eight"=>8, "Nine"=>9, "Ten"=>10,
-                  "Jack"=>11, "Queen"=>12, "King"=>13}
+  def initialize
+    super
+    @hash_values = {"Ace"=>1, "Two"=>2, "Three"=>3, "Four"=>4, "Five"=>5,
+                    "Six"=>6, "Seven"=>7, "Eight"=>8, "Nine"=>9, "Ten"=>10,
+                    "Jack"=>11, "Queen"=>12, "King"=>13}
+  end
 end
 
 class Liar < Hand_2cards
   include Evaluate
-  @hash_values = {"Ace"=>13, "Two"=>12, "Three"=>11, "Four"=>10, "Five"=>9,
-                  "Six"=>8, "Seven"=>7, "Eight"=>6, "Nine"=>5, "Ten"=>4,
-                  "Jack"=>3, "Queen"=>2, "King"=>1}
+  def initialize
+    super
+    @hash_values = {"Ace"=>13, "Two"=>12, "Three"=>11, "Four"=>10, "Five"=>9,
+                    "Six"=>8, "Seven"=>7, "Eight"=>6, "Nine"=>5, "Ten"=>4,
+                    "Jack"=>3, "Queen"=>2, "King"=>1}
+  end
 end
