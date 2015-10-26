@@ -94,8 +94,6 @@ class Hand_test < Test::Unit::TestCase
     assert_equal(11, @light.value(ten), 'different value found')
     assert_equal(6, @light.value(king), 'different value found')
 
-    assert_equal(13, @light.find_max, 'max found incorrectly')
-    assert_equal(1, @light.find_min, 'min found incorrectly')
     assert_equal(2.8, @light.evaluate, 'hand evaluated incorrectly')
     assert_not_equal(nil, @light.evaluate, 'hand is not complete')
   end
@@ -124,10 +122,8 @@ class Hand_test < Test::Unit::TestCase
     assert_equal(9, @idiot.value(nine), 'different value found')
 
     assert_equal(2, @idiot.cards.size, 'wrong hand size')
-    
-    #assert_equal(9, @light.find_max, 'max found incorrectly')
-    #assert_equal(2, @light.find_min, 'min found incorrectly')
-    #assert_equal(5.5, @light.evaluate, 'hand evaluated incorrectly')
+
+    assert_equal(5.5, @idiot.evaluate, 'hand evaluated incorrectly')
   end
   
   def test_liar
@@ -155,8 +151,6 @@ class Hand_test < Test::Unit::TestCase
 
     assert_equal(2, @liar.cards.size, 'wrong hand size')
 
-    #assert_equal(12, @light.find_max, 'max found incorrectly')
-    #assert_equal(5, @light.find_min, 'min found incorrectly')
-    #assert_equal(5.5, @light.evaluate, 'hand evaluated incorrectly')
+    assert_equal(8.5, @liar.evaluate, 'hand evaluated incorrectly')
   end
 end
