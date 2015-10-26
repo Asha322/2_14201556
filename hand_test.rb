@@ -69,7 +69,7 @@ class Hand_test < Test::Unit::TestCase
 
     @light.add_card(nine)
     assert_equal(true, @light.contains?(nine), 'value not added')
-    assert_not_equal(true, @spider.complete?, 'incorrect evaluation')
+    assert_not_equal(true, @light.complete?, 'incorrect evaluation')
 
     @light.add_card(two)
     assert_equal(true, @light.contains?(two), 'value not added')
@@ -101,6 +101,62 @@ class Hand_test < Test::Unit::TestCase
   end
 
   def test_idiot
+    nine = Card.new("Nine")
+    two = Card.new("Two")
+    ace = Card.new("Ace")
 
+    #test Idiot class
+
+    @idiot.add_card(nine)
+    assert_equal(true, @idiot.contains?(nine), 'value not added')
+    assert_not_equal(true, @idiot.complete?, 'incorrect evaluation')
+
+    @idiot.add_card(nine)
+    assert_not_equal(true, @idiot.complete?, 'extra value added')
+
+    @idiot.add_card(two)
+    assert_equal(true, @idiot.contains?(two), 'value not added')
+    assert_equal(true, @idiot.complete?, 'incorrect evaluation')
+
+    @idiot.add_card(ace)
+    assert_equal(false, @idiot.contains?(ace), 'extra value added')
+
+    assert_equal(9, @idiot.value(nine), 'different value found')
+
+    assert_equal(2, @idiot.cards.size, 'wrong hand size')
+    
+    #assert_equal(9, @light.find_max, 'max found incorrectly')
+    #assert_equal(2, @light.find_min, 'min found incorrectly')
+    #assert_equal(5.5, @light.evaluate, 'hand evaluated incorrectly')
+  end
+  
+  def test_liar
+    nine = Card.new("Nine")
+    two = Card.new("Two")
+    ace = Card.new("Ace")
+
+    #test Liar class
+
+    @liar.add_card(nine)
+    assert_equal(true, @liar.contains?(nine), 'value not added')
+    assert_not_equal(true, @liar.complete?, 'incorrect evaluation')
+
+    @liar.add_card(nine)
+    assert_not_equal(true, @liar.complete?, 'extra value added')
+
+    @liar.add_card(two)
+    assert_equal(true, @liar.contains?(two), 'value not added')
+    assert_equal(true, @liar.complete?, 'incorrect evaluation')
+
+    @liar.add_card(ace)
+    assert_equal(false, @liar.contains?(ace), 'extra value added')
+
+    assert_equal(5, @liar.value(nine), 'different value found')
+
+    assert_equal(2, @liar.cards.size, 'wrong hand size')
+
+    #assert_equal(12, @light.find_max, 'max found incorrectly')
+    #assert_equal(5, @light.find_min, 'min found incorrectly')
+    #assert_equal(5.5, @light.evaluate, 'hand evaluated incorrectly')
   end
 end
