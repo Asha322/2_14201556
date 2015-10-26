@@ -1,4 +1,4 @@
-In my solution there is a main class Hand, which contains the methods common for all games: 
+In my solution I implemented a main class Hand, which contains the methods common for all games: 
 complete?, contains?, add_value(c) and value(c).
 As games Spider and Light are played with 5 cards in hand and Idiot and Liar are played with 2 cards in hand,
 I decided to make 2 classes inheriting hand - Hand_2cards and Hand_5cards, and then the four classes inherit
