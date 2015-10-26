@@ -6,12 +6,12 @@ class Hand
 
   attr_accessor :size, :cards
   def complete?
-    @cards.size.equal?(@size)
+    @cards.size == @size
   end
 
   def contains?(c)
     @cards.each do |i|
-      if i.to_s.eql?(c.to_s)
+      if i.to_s == c.to_s
         return false
       end
     end
@@ -19,16 +19,13 @@ class Hand
   end
 
   def add_card(c)
-    if !(self.complete?)
-      if !(self.contains?(c))
-        @cards.push(c)
-      end
-    end
+    @cards << c if !complete? && !contains?(c)
   end
 
   def value(c)
     @hash_values[c.to_s]
   end
+
 end
 
 class Hand_2cards < Hand
@@ -37,7 +34,7 @@ class Hand_2cards < Hand
 
   def initialize
     @size = 2
-    @cards = []
+    @cards = Array.new
   end
 end
 
