@@ -1,0 +1,8 @@
+In my solution there is a main class Hand, which contains the methods common for all games: 
+complete?, contains?, add_value(c) and value(c).
+As games Spider and Light are played with 5 cards in hand and Idiot and Liar are played with 2 cards in hand,
+I decided to make 2 classes inheriting hand - Hand_2cards and Hand_5cards, and then the four classes inherit
+from them. The problem is that both classes inheriting Hand_2cards and one class inheriting Hand_5cards
+have the same way of evaluating the hand, so there's no point in rewriting this method, on the other hand, the Spider game
+has an absolutely different way of doing it. So I created a module with a method common for three classes and
+included it in them.
